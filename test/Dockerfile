@@ -1,8 +1,14 @@
 FROM nginx:stable-alpine as build-stage
 
+<<<<<<< Updated upstream
 COPY test/src/ /usr/share/nginx/html/
 COPY MP4/SD/rickroll.mp4 /usr/share/nginx/html/rickroll.mp4
 COPY test/conf/nginx-site.conf /etc/nginx/conf.d/default.conf
+=======
+COPY 4k/src/ /usr/share/nginx/html/
+COPY MP4/4k/rickroll.mp4 /usr/share/nginx/html/rickroll.mp4
+COPY 4k/conf/nginx-site.conf /etc/nginx/conf.d/default.conf
+>>>>>>> Stashed changes
 
 FROM nginx:stable-alpine
 COPY --from=build-stage /usr/share/nginx/html/ /usr/share/nginx/html/

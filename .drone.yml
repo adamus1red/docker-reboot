@@ -14,7 +14,11 @@ steps:
   pull: if-not-exists
   commands:
     - hadolint --version
+<<<<<<< Updated upstream
     - hadolint ./SD/piholeunbound/Dockerfile*
+=======
+    - hadolint ./SD/Dockerfile*
+>>>>>>> Stashed changes
 
 - name: latest  
   image: thegeeklab/drone-docker-buildx
@@ -271,6 +275,7 @@ trigger:
   - cron
   cron:
   - rickroll_1080onclick
+<<<<<<< Updated upstream
 
 ---
 
@@ -289,30 +294,56 @@ steps:
   commands:
     - hadolint --version
     - hadolint ./4k/Dockerfile*
+=======
+>>>>>>> Stashed changes
 
-- name: 4k
+---
+
+kind: pipeline
+type: docker
+name: test
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: Lint Dockerfile
+  image: hadolint/hadolint:latest-alpine
+  pull: if-not-exists
+  commands:
+    - hadolint --version
+    - hadolint ./test/Dockerfile*
+
+- name: test build
   image: thegeeklab/drone-docker-buildx
   privileged: true
   settings:
     repo: modem7/docker-rickroll
     purge: true
     compress: true
+<<<<<<< Updated upstream
     use_cache: true
     squash: true
     cache_from: "modem7/docker-rickroll:4k"
+=======
+    # use_cache: true
+    # cache_from: "modem7/docker-rickroll:test"
+>>>>>>> Stashed changes
     platforms: # if it doesn't work run docker run --privileged --rm tonistiigi/binfmt --install all
       - linux/amd64
-      - linux/arm/v6
-      - linux/arm/v7
-      - linux/arm64/v8
-    dockerfile: 4k/Dockerfile
-    # context: onclick/
+      # - linux/arm/v6
+      # - linux/arm/v7
+      # - linux/arm64/v8
+    dockerfile: test/Dockerfile
+    # context: test/
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    tags: 4k
+    tags: test
 
+<<<<<<< Updated upstream
 - name: slack
   image: themaz/drone-slack
   settings:
@@ -326,12 +357,21 @@ trigger:
   - cron
   cron:
   - rickroll_4k
+=======
+trigger:
+  branch:
+  - test
+>>>>>>> Stashed changes
 
 ---
 
 kind: pipeline
 type: docker
+<<<<<<< Updated upstream
 name: 4konclick
+=======
+name: 1080game
+>>>>>>> Stashed changes
 
 platform:
   os: linux
@@ -343,9 +383,15 @@ steps:
   pull: if-not-exists
   commands:
     - hadolint --version
+<<<<<<< Updated upstream
     - hadolint ./4k/onclick/Dockerfile*
 
 - name: 4konclick
+=======
+    - hadolint ./1080game/Dockerfile*
+
+- name: 1080game
+>>>>>>> Stashed changes
   image: thegeeklab/drone-docker-buildx
   privileged: true
   settings:
@@ -353,20 +399,24 @@ steps:
     purge: true
     compress: true
     use_cache: true
+<<<<<<< Updated upstream
     squash: true
     cache_from: "modem7/docker-rickroll:4konclick"
+=======
+    cache_from: "modem7/docker-rickroll:1080game"
+>>>>>>> Stashed changes
     platforms: # if it doesn't work run docker run --privileged --rm tonistiigi/binfmt --install all
       - linux/amd64
       - linux/arm/v6
       - linux/arm/v7
       - linux/arm64/v8
-    dockerfile: 4k/onclick/Dockerfile
+    dockerfile: 1080game/Dockerfile
     # context: onclick/
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    tags: 4konclick
+    tags: 1080game
 
 - name: slack
   image: themaz/drone-slack
@@ -378,6 +428,7 @@ steps:
 
 trigger:
   event:
+<<<<<<< Updated upstream
   - cron
   cron:
   - rickroll_4konclick
@@ -425,3 +476,6 @@ steps:
 trigger:
   branch:
   - test
+=======
+  - custom
+>>>>>>> Stashed changes
