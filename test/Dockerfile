@@ -12,4 +12,4 @@ RUN apk update \
     curl \
     && chmod 755 /entry.sh
 EXPOSE 80 8080
-CMD ["/entry.sh"]
+ENTRYPOINT ["/entry.sh"]
