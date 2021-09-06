@@ -13,3 +13,4 @@ RUN apk update \
     && chmod 755 /entry.sh
 EXPOSE 80 8080
 ENTRYPOINT ["/entry.sh"]
+CMD ["nginx"]
