@@ -1,5 +1,6 @@
 #!/bin/sh
 #Variables
-FILEURL=$(https://share.modem7.com/nEsO3/fEduWuXa02.mp4);
+URL=https://share.modem7.com/nEsO3/fEduWuXa02.mp4
+FILEURL=$URL
 # Download Video
-curl $FILEURL --output /usr/share/nginx/html/rickroll.mp4
+curl $URL --output /usr/share/nginx/html/rickroll.mp4
